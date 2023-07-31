@@ -1,5 +1,5 @@
-# hhas
-Efficient Hybrid A-Star Implementation
+# hhas [WIP]
+Efficient Hybrid A-Star Implementation for Holonomic/Non-Holonomic Constraints
 ## Implementation Details
 - Efficient Core A-star algorithm
 - CRTP Pattern for injecting problem and state definitions
