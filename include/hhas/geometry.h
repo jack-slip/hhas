@@ -120,6 +120,46 @@ namespace hhas
                 return dist;
             }
         };
+
+        class Rectangle
+        {
+        private:
+            Polygon poly;
+
+        public:
+            // Constructor: Define a rectangle using all four corners
+            Rectangle(const Vec2 &bottom_left, const Vec2 &bottom_right, const Vec2 &top_right, const Vec2 &top_left)
+            {
+                poly.addVertex(bottom_left);
+                poly.addVertex(bottom_right);
+                poly.addVertex(top_right);
+                poly.addVertex(top_left);
+            }
+            Rectangle(const std::vector<Vec2> &vertices)
+            {
+                if (vertices.size() != 4)
+                    throw std::runtime_error("Rectangle must be defined with 4 vertices");
+                poly.addVertices(vertices);
+            }
+
+            // Move rectangle by x, y and rotate by yaw
+            void move(const float &x, const float &y, const float &yaw)
+            {
+                poly.move(x, y, yaw);
+            }
+
+            // Check if a point is inside the rectangle
+            bool inside(const Vec2 &a) const
+            {
+                return poly.inside(a);
+            }
+
+            // Get the distance between a point and the rectangle
+            float dist(const Vec2 &a) const
+            {
+                return poly.dist(a);
+            }
+        };
     }
 }
 #endif // HHAS_POLYGON_H

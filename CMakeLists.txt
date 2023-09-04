@@ -14,6 +14,7 @@ include_directories(include)
 find_package(OpenCV REQUIRED)
 
 #find nanoFLANN
+find_package(Threads REQUIRED)
 find_package(nanoflann REQUIRED)
 
 #find omp

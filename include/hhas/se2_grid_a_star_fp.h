@@ -1,5 +1,5 @@
-#ifndef HHAS_SE2_GRID_A_STAR_H
-#define HHAS_SE2_GRID_A_STAR_H
+#ifndef HHAS_SE2_GRID_A_STAR_FP_H
+#define HHAS_SE2_GRID_A_STAR_FP_H
 
 #include <hhas/a_star.h>
 #include <hhas/states/se2_grid_state.h>
@@ -199,12 +199,12 @@ namespace hhas
             // make the query point raw array
             float query_idx[2] = {y, x};
 
-            auto search_params = nanoflann::SearchParams();
+            auto search_params = nanoflann::SearchParameters();
             search_params.sorted = false;
 
             float radius = footprint_.r;
 
-            std::vector<std::pair<size_t, float>> indices_dists;
+            std::vector<nanoflann::ResultItem<size_t, float>> indices_dists;
             kd_tree_->radiusSearch(&query_idx[0], radius * radius, indices_dists, search_params);
 
             if (indices_dists.size() > 0)

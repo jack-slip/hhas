@@ -25,7 +25,7 @@ namespace hhas
                       << std::endl;
         }
 
-        void radiusSearch(const float *query_pt, const float radius, std::vector<std::pair<size_t, float>> &indices_dists, const nanoflann::SearchParams &search_params = nanoflann::SearchParams())
+        void radiusSearch(const float *query_pt, const float radius, std::vector<nanoflann::ResultItem<size_t, float>> &indices_dists, const nanoflann::SearchParameters &search_params = nanoflann::SearchParameters())
         {
             kdtree_->index->radiusSearch(query_pt, radius, indices_dists, search_params);
         }
