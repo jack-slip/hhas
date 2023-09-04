@@ -42,7 +42,7 @@ int main()
         assert(grid[state.y][state.x] != 1);
     }
 
-    hhas::viz::drawGridAndPath(grid, path, 1);
+    // hhas::viz::drawGridAndPath(grid, path, 1);
 
     return 0;
 }

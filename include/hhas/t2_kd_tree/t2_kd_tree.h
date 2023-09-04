@@ -25,6 +25,11 @@ namespace hhas
                       << std::endl;
         }
 
+        std::vector<float> getIndex(const int i) const
+        {
+            return occ_indices_[i];
+        }
+
         void radiusSearch(const float *query_pt, const float radius, std::vector<nanoflann::ResultItem<size_t, float>> &indices_dists, const nanoflann::SearchParameters &search_params = nanoflann::SearchParameters())
         {
             kdtree_->index->radiusSearch(query_pt, radius, indices_dists, search_params);

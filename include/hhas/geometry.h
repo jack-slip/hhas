@@ -124,40 +124,58 @@ namespace hhas
         class Rectangle
         {
         private:
-            Polygon poly;
+            Polygon poly_;
+            float inscribed_radius_;
+            float circumscribed_radius_;
+
+            void computeRadii(const Vec2 &bottom_left, const Vec2 &bottom_right, const Vec2 &top_right, const Vec2 &top_left)
+            {
+                float width = bottom_left.dist(bottom_right);
+                float height = bottom_left.dist(top_left);
+
+                inscribed_radius_ = 0.5 * std::min(width, height);
+                circumscribed_radius_ = 0.5 * std::hypot(width, height);
+            }
 
         public:
             // Constructor: Define a rectangle using all four corners
             Rectangle(const Vec2 &bottom_left, const Vec2 &bottom_right, const Vec2 &top_right, const Vec2 &top_left)
             {
-                poly.addVertex(bottom_left);
-                poly.addVertex(bottom_right);
-                poly.addVertex(top_right);
-                poly.addVertex(top_left);
+                poly_.addVertex(bottom_left);
+                poly_.addVertex(bottom_right);
+                poly_.addVertex(top_right);
+                poly_.addVertex(top_left);
+                computeRadii(bottom_left, bottom_right, top_right, top_left);
             }
             Rectangle(const std::vector<Vec2> &vertices)
             {
                 if (vertices.size() != 4)
                     throw std::runtime_error("Rectangle must be defined with 4 vertices");
-                poly.addVertices(vertices);
+                poly_.addVertices(vertices);
+                computeRadii(vertices[0], vertices[1], vertices[2], vertices[3]);
             }
+
+            std::vector<Vec2> getVertices() const { return poly_.v; }
+
+            float getInscribedRadius() const { return inscribed_radius_; }
+            float getCircumscribedRadius() const { return circumscribed_radius_; }
 
             // Move rectangle by x, y and rotate by yaw
             void move(const float &x, const float &y, const float &yaw)
             {
-                poly.move(x, y, yaw);
+                poly_.move(x, y, yaw);
             }
 
             // Check if a point is inside the rectangle
             bool inside(const Vec2 &a) const
             {
-                return poly.inside(a);
+                return poly_.inside(a);
             }
 
             // Get the distance between a point and the rectangle
             float dist(const Vec2 &a) const
             {
-                return poly.dist(a);
+                return poly_.dist(a);
             }
         };
     }
