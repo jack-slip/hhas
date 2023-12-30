@@ -81,8 +81,8 @@ namespace hhas
                     auto plan_end = std::chrono::high_resolution_clock::now();
                     std::cout
                         << "Planning time: "
-                        << std::chrono::duration_cast<std::chrono::milliseconds>(plan_end - plan_start).count()
-                        << " ms" << std::endl;
+                        << std::chrono::duration_cast<std::chrono::microseconds>(plan_end - plan_start).count()
+                        << " us" << std::endl;
 
                     std::cout << "States expanded: " << states_expanded << std::endl;
 

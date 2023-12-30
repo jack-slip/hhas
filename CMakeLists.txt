@@ -7,8 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # set the build type to release
 set(CMAKE_BUILD_TYPE Release)
 
-# Add the directory where AStar and GridAStar headers are stored
-include_directories(include)
+# Add the directory where AStar and GridAStar headers are storedoput 
+# todo, figure out nanoflann include
+include_directories(include /home/jack/hhas/nanoflann/include)
 
 # find OpenCV
 find_package(OpenCV REQUIRED)
@@ -31,4 +32,4 @@ add_executable(se2_grid_a_star_fp src/se2_grid_a_star_fp.cpp)
 target_link_libraries(se2_grid_a_star ${OpenCV_LIBS})
 
 # link opencv and nanoflann to se2_grid_a_star_fp target, also link OpenMP
-target_link_libraries(se2_grid_a_star_fp ${OpenCV_LIBS} nanoflann::nanoflann OpenMP::OpenMP_CXX)
+target_link_libraries(se2_grid_a_star_fp ${OpenCV_LIBS} OpenMP::OpenMP_CXX)
